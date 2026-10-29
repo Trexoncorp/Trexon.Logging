@@ -4,7 +4,7 @@
 
 [Project home](../../README.md)
 
-These guides cover the `0.1.0-alpha.1` MVP. Start with the runnable sample,
+These guides cover the stable `1.0.0` release. Start with the runnable sample,
 then choose a feature. Complete C# programs marked `verify` are compiled and run by
 `python3 scripts/check-docs.py`. API signature blocks are declarations, not programs.
 Sample data is shared between translations, including Russian Unicode strings.

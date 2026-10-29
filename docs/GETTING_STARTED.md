@@ -71,7 +71,7 @@ dotnet pack Trexon.Logging/Trexon.Logging.csproj --configuration Release --no-bu
 
 ```sh
 trexon_package_source="$(pwd)/artifacts"
-dotnet add ../Trexon.Logging.Playground package Trexon.Logging --version 0.1.0-dev --source "$trexon_package_source"
+dotnet add ../Trexon.Logging.Playground package Trexon.Logging --version 1.0.0-dev --source "$trexon_package_source"
 ```
 
 Выберите один способ подключения: при переходе с ProjectReference на пакет
@@ -79,16 +79,16 @@ dotnet add ../Trexon.Logging.Playground package Trexon.Logging --version 0.1.0-d
 из корня репозитория в Bash/zsh. В другой оболочке передайте полный путь
 к `artifacts/` напрямую.
 
-NuGet кэширует пакет по ID и версии. Если повторно собираете `0.1.0-dev`,
+NuGet кэширует пакет по ID и версии. Если повторно собираете `1.0.0-dev`,
 уже установленная копия может остаться в кэше. Для отдельной проверки удобна
 уникальная версия; у `build` и `pack --no-build` она должна совпадать:
 
 ```sh
-dotnet build Trexon.Logging/Trexon.Logging.csproj --configuration Release -p:Version=0.1.0-local.1
-dotnet pack Trexon.Logging/Trexon.Logging.csproj --configuration Release --no-build --output artifacts -p:Version=0.1.0-local.1
+dotnet build Trexon.Logging/Trexon.Logging.csproj --configuration Release -p:Version=1.0.0-local.1
+dotnet pack Trexon.Logging/Trexon.Logging.csproj --configuration Release --no-build --output artifacts -p:Version=1.0.0-local.1
 ```
 
-Затем установите `--version 0.1.0-local.1`. Это локальная проверка, команды
+Затем установите `--version 1.0.0-local.1`. Это локальная проверка, команды
 `dotnet nuget push` здесь не нужны.
 
 ## Первый логгер
@@ -148,16 +148,12 @@ finally
 
 ## Установка из NuGet
 
-Обычная команда `dotnet add package Trexon.Logging` выбирает стабильную версию.
-Пока опубликованы только alpha-версии, нужен `--prerelease` или явный `--version`.
-
-Для первого prerelease укажите версию явно; для последнего prerelease используйте
-`--prerelease`:
+Установить последнюю стабильную версию:
 
 ```sh
-dotnet add package Trexon.Logging --version 0.1.0-alpha.1
-dotnet add package Trexon.Logging --prerelease
+dotnet add package Trexon.Logging
 ```
 
-Текущее состояние релизов смотрите в реестре перед установкой. Подготовка
-пакета и выпуск по тегу описаны в [публикации](PUBLISHING.md).
+Чтобы закрепить первый стабильный релиз, добавьте `--version 1.0.0`.
+Для будущих предварительных версий используйте `--prerelease` явно.
+Подготовка пакета и выпуск по тегу описаны в [публикации](PUBLISHING.md).

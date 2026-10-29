@@ -56,10 +56,10 @@ und [Symbolpakete](https://learn.microsoft.com/en-us/nuget/create-packages/symbo
 
 ```sh
 dotnet restore Trexon.Logging.slnx
-dotnet build Trexon.Logging.slnx --configuration Release --no-restore -p:Version=0.1.0-alpha.1 -p:ContinuousIntegrationBuild=true -warnaserror
+dotnet build Trexon.Logging.slnx --configuration Release --no-restore -p:Version=1.0.0 -p:ContinuousIntegrationBuild=true -warnaserror
 dotnet test --solution Trexon.Logging.slnx --configuration Release --no-build --no-restore
 python3 scripts/check-docs.py
-dotnet pack Trexon.Logging/Trexon.Logging.csproj --configuration Release --no-build --output artifacts -p:Version=0.1.0-alpha.1 -p:ContinuousIntegrationBuild=true -warnaserror
+dotnet pack Trexon.Logging/Trexon.Logging.csproj --configuration Release --no-build --output artifacts -p:Version=1.0.0 -p:ContinuousIntegrationBuild=true -warnaserror
 ```
 
 Build und pack --no-build benötigen dieselbe Version. Das nupkg enthält net8.0-DLL,
@@ -74,8 +74,8 @@ Anweisungen und werden bei der Projektvorbereitung nicht automatisch ausgeführt
 ```sh
 git switch main
 git pull --ff-only origin main
-git tag -a v0.1.0-alpha.1 -m "Trexon.Logging 0.1.0-alpha.1"
-git push origin v0.1.0-alpha.1
+git tag -a v1.0.0 -m "Trexon.Logging 1.0.0"
+git push origin v1.0.0
 ```
 
 Die Version stammt nur aus dem Tag, eine csproj-Änderung ist unnötig. Gültige Beispiele:
@@ -83,7 +83,7 @@ v1.2.3, v1.2.3-alpha.1, v1.2.3-rc.2. Führende Nullen, fehlende numerische Teile
 +Build-Metadaten werden abgelehnt. Ohne Veröffentlichung prüfen:
 
 ```sh
-bash scripts/release-version.sh v0.1.0-alpha.1
+bash scripts/release-version.sh v1.0.0
 ```
 
 Abschluss von **Publish to NuGet** abwarten und die Paketseite prüfen. Validierung
@@ -95,8 +95,7 @@ Bei vorübergehenden Fehlern fehlgeschlagene Jobs erneut starten. --skip-duplica
 erlaubt erneutes Senden bereits vorhandener Pakete. Symbole haben einen eigenen
 Schritt. Nach Ablauf der Artefakte alle Jobs desselben Tags wiederholen.
 Veröffentlichte Versionen und Release-Tags nicht umwidmen; Korrekturen erhalten neue
-Tags. Reguläre CI baut 0.1.0-dev ohne Veröffentlichung. Den ersten Release als
-abgestimmte Vorabversion ausgeben.
+Tags. Reguläre CI baut 1.0.0-dev ohne Veröffentlichung. Version und Release-Kanal vor dem Tag ausdrücklich festlegen.
 
 Vor dem Tag CI von main auf allen drei Betriebssystemen prüfen. Der Release-Workflow
 testet erneut auf Ubuntu und wartet nicht automatisch auf einen separaten CI-Lauf.

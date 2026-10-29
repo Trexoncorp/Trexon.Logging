@@ -101,7 +101,7 @@ dotnet build Trexon.Logging/Trexon.Logging.csproj --configuration Release -p:Con
 dotnet pack Trexon.Logging/Trexon.Logging.csproj --configuration Release --no-build --output artifacts -p:ContinuousIntegrationBuild=true -warnaserror
 ```
 
-Unter `artifacts/` entstehen nupkg und snupkg der Version `0.1.0-dev`. Das Hauptpaket
+Unter `artifacts/` entstehen nupkg und snupkg der Version `1.0.0-dev`. Das Hauptpaket
 enthält DLL, XML-Dokumentation, mehrsprachige READMEs, MIT-Lizenz und Repositorydaten.
 Das Symbolpaket enthält portable PDBs. SDK Source Link verknüpft versionierte Quellen
 mit dem Repository; nicht erfasste Quellen können in PDBs eingebettet werden.

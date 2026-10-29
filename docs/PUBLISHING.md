@@ -65,10 +65,10 @@
 
 ```sh
 dotnet restore Trexon.Logging.slnx
-dotnet build Trexon.Logging.slnx --configuration Release --no-restore -p:Version=0.1.0-alpha.1 -p:ContinuousIntegrationBuild=true -warnaserror
+dotnet build Trexon.Logging.slnx --configuration Release --no-restore -p:Version=1.0.0 -p:ContinuousIntegrationBuild=true -warnaserror
 dotnet test --solution Trexon.Logging.slnx --configuration Release --no-build --no-restore
 python3 scripts/check-docs.py
-dotnet pack Trexon.Logging/Trexon.Logging.csproj --configuration Release --no-build --output artifacts -p:Version=0.1.0-alpha.1 -p:ContinuousIntegrationBuild=true -warnaserror
+dotnet pack Trexon.Logging/Trexon.Logging.csproj --configuration Release --no-build --output artifacts -p:Version=1.0.0 -p:ContinuousIntegrationBuild=true -warnaserror
 ```
 
 У `build` и `pack --no-build` версия должна совпадать, чтобы версия DLL
@@ -86,8 +86,8 @@ Source Link поддерживается SDK; связь с исходникам
 ```sh
 git switch main
 git pull --ff-only origin main
-git tag -a v0.1.0-alpha.1 -m "Trexon.Logging 0.1.0-alpha.1"
-git push origin v0.1.0-alpha.1
+git tag -a v1.0.0 -m "Trexon.Logging 1.0.0"
+git push origin v1.0.0
 ```
 
 Версия берётся только из тега; редактировать `.csproj` перед релизом не нужно.
@@ -97,7 +97,7 @@ git push origin v0.1.0-alpha.1
 Проверка формата без публикации:
 
 ```sh
-bash scripts/release-version.sh v0.1.0-alpha.1
+bash scripts/release-version.sh v1.0.0
 ```
 
 Проверить завершение workflow **Publish to NuGet**, затем страницу пакета на
@@ -112,9 +112,9 @@ Workflow не создаёт GitHub Release — он публикует NuGet-п
 Если артефакт истёк, повторно запустить все jobs для того же тега.
 
 Опубликованные версии и релизные теги не переиспользовать. Исправления
-выпускать новым тегом. Обычный CI собирает пакеты версии `0.1.0-dev`
+выпускать новым тегом. Обычный CI собирает пакеты версии `1.0.0-dev`
 для локальных проверок и сам не вызывает publish. Отправка версии определяется
-отдельным релизным тегом; для первого релиза используйте согласованный prerelease.
+отдельным релизным тегом; версию и тип релиза выбирайте явно перед созданием тега.
 
 Перед тегом проверьте CI main на всех трёх ОС. Релизный workflow повторно
 запускает свои тесты на Ubuntu и автоматически не ожидает отдельный запуск CI.

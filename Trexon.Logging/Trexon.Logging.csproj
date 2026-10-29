@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <IsPackable>true</IsPackable>
-    <Version>0.1.0-dev</Version>
+    <Version>1.0.0-dev</Version>
 
     <PackageId>Trexon.Logging</PackageId>
     <Title>Trexon.Logging</Title>

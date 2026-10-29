@@ -4,7 +4,7 @@
 
 [Projektstartseite](../../README.de.md)
 
-Diese Anleitungen beschreiben das MVP der Version `0.1.0-alpha.1`. Mit dem ausführbaren
+Diese Anleitungen beschreiben die stabile Version `1.0.0`. Mit dem ausführbaren
 Beispiel beginnen und danach die gewünschte Funktion auswählen. Vollständige
 C#-Programme mit `verify` werden durch `python3 scripts/check-docs.py` kompiliert
 und ausgeführt. API-Signaturen sind Deklarationen, keine vollständigen Programme.

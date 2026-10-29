@@ -6,8 +6,8 @@ Strukturiertes Logging für C# / .NET 8+: Fluent-Konfiguration, farbige
 Konsolenausgabe, Text- und JSON-Dateien, Kontext und Maskierung von Daten.
 Die Kernbibliothek hat keine externen NuGet-Abhängigkeiten. Lizenz: [MIT](LICENSE).
 
-**Version:** `0.1.0-alpha.1`, die erste MVP-Vorabversion. Die API kann sich bis
-Version 1.0 ändern. Diese Dokumentation beschreibt diese Version.
+**Version:** `1.0.0`, die erste stabile Veröffentlichung. Die öffentliche API bleibt
+innerhalb von 1.x kompatibel; inkompatible Änderungen erfordern eine neue Hauptversion.
 
 ## Mit einer Zeile beginnen
 
@@ -53,11 +53,11 @@ Beispieldaten; russische Texte demonstrieren die Unicode-Unterstützung.
 
 ## Installation und Prüfung
 
-Die erste Vorabversion aus NuGet installieren. Projektreferenzen und lokale
+Die neueste stabile Version aus NuGet installieren. Projektreferenzen und lokale
 Pakete werden im [Schnellstart](docs/de/GETTING_STARTED.md) beschrieben.
 
 ```sh
-dotnet add package Trexon.Logging --version 0.1.0-alpha.1
+dotnet add package Trexon.Logging
 ```
 
 Für die Entwicklung werden SDK 10 und die .NET-8-Runtime benötigt. Im Projektstamm:
@@ -94,7 +94,7 @@ Einstieg: [Dokumentationsübersicht](docs/de/README.md).
 | Unerwartetes Verhalten untersuchen | [Fehlersuche](docs/de/TROUBLESHOOTING.md) |
 | Geplante Arbeit ansehen | [Plan](docs/de/ROADMAP.md) |
 
-## Grenzen des MVP
+## Aktuelle Grenzen
 
 Die Ausgabe ist synchron: Ein langsamer Empfänger verzögert den aufrufenden Thread.
 Rotation, Aufbewahrungsregeln, Hintergrundwarteschlange und ein Adapter für
