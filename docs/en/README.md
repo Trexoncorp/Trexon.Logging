@@ -2,7 +2,7 @@
 
 [Русский](../README.md) · [English](../en/README.md) · [Deutsch](../de/README.md)
 
-[Project home](../../README.en.md)
+[Project home](../../README.md)
 
 These guides cover the `0.1.0-alpha.1` MVP. Start with the runnable sample,
 then choose a feature. Complete C# programs marked `verify` are compiled and run by
