@@ -65,9 +65,9 @@
 
 ```sh
 dotnet restore Trexon.Logging.slnx
+python3 scripts/check-docs.py
 dotnet build Trexon.Logging.slnx --configuration Release --no-restore -p:Version=1.0.0 -p:ContinuousIntegrationBuild=true -warnaserror
 dotnet test --solution Trexon.Logging.slnx --configuration Release --no-build --no-restore
-python3 scripts/check-docs.py
 dotnet pack Trexon.Logging/Trexon.Logging.csproj --configuration Release --no-build --output artifacts -p:Version=1.0.0 -p:ContinuousIntegrationBuild=true -warnaserror
 ```
 
