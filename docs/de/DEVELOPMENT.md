@@ -25,7 +25,7 @@ dotnet --list-runtimes
 | Trexon.Logging/ | net8.0-Kernbibliothek mit interner Implementierung |
 | tests/Trexon.Logging.Tests/ | xUnit v3 / Microsoft Testing Platform |
 | examples/Trexon.Logging.Sample/ | Ausführbares net8.0-Konsolenbeispiel |
-| README.md / README.en.md / README.de.md | Russische, englische und deutsche Projektseiten |
+| README.md / README.ru.md / README.de.md | Englische, russische und deutsche Projektseiten; README.en.md erhält bestehende englische Links |
 | docs/ / docs/en/ / docs/de/ | Anleitungen in drei Sprachen |
 | scripts/check-docs.py | Übersetzungsvollständigkeit, Links und ausführbare Beispiele |
 | scripts/release-version.sh | Prüfung des Release-Tags und Versionsableitung |
@@ -69,7 +69,7 @@ Erfolgreiche Tests bestätigen geprüfte Szenarien, keine Leistungs-SLA oder Nat
 
 ## Dokumentation und Übersetzungen
 
-NuGet verwendet `README.en.md` über `PackageReadmeFile`. Die Beispiele sind englisch
+NuGet verwendet `README.md` über `PackageReadmeFile`. Die Beispiele sind englisch
 und Links absolut, damit sie auf GitHub und nuget.org funktionieren. Änderungen
 am eingebetteten README eines veröffentlichten Pakets benötigen eine neue Paketversion.
 

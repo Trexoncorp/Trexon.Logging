@@ -1,6 +1,6 @@
 # Trexon.Logging
 
-[Русский](README.md) · [English](README.en.md) · [Deutsch](README.de.md)
+[English](https://github.com/Trexoncorp/Trexon.Logging/blob/main/README.md) · [Русский](https://github.com/Trexoncorp/Trexon.Logging/blob/main/README.ru.md) · [Deutsch](https://github.com/Trexoncorp/Trexon.Logging/blob/main/README.de.md)
 
 Strukturiertes Logging für C# / .NET 8+: Fluent-Konfiguration, farbige
 Konsolenausgabe, Text- und JSON-Dateien, Kontext und Maskierung von Daten.

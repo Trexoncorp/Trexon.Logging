@@ -16,8 +16,8 @@ import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 LANGUAGES = {
-    "ru": ("README.md", "docs"),
-    "en": ("README.en.md", "docs/en"),
+    "ru": ("README.ru.md", "docs"),
+    "en": ("README.md", "docs/en"),
     "de": ("README.de.md", "docs/de"),
 }
 EXAMPLE = re.compile(
@@ -52,6 +52,7 @@ def documentation_paths() -> list[Path]:
         errors.append("No Russian documentation pages found.")
     if errors:
         raise ValueError("\n".join(errors))
+    paths.append(ROOT / "README.en.md")  # Compatibility page for existing links.
     paths.extend(sorted((ROOT / "docs").rglob("*.md")))
     print(f"Validated documentation languages: {', '.join(LANGUAGES)}.", flush=True)
     return paths
