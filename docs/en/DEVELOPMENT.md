@@ -69,6 +69,10 @@ covered behaviors, not a performance SLA or Native AOT support.
 
 ## Documentation and translations
 
+NuGet uses `README.en.md` through `PackageReadmeFile`. Its examples are in English
+and links are absolute so they work on GitHub and nuget.org. Changing an embedded
+README of a published package requires a new package version.
+
 ```sh
 python3 scripts/check-docs.py --links-only
 python3 scripts/check-docs.py

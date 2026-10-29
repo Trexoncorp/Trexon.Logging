@@ -69,6 +69,10 @@ Erfolgreiche Tests bestätigen geprüfte Szenarien, keine Leistungs-SLA oder Nat
 
 ## Dokumentation und Übersetzungen
 
+NuGet verwendet `README.en.md` über `PackageReadmeFile`. Die Beispiele sind englisch
+und Links absolut, damit sie auf GitHub und nuget.org funktionieren. Änderungen
+am eingebetteten README eines veröffentlichten Pakets benötigen eine neue Paketversion.
+
 ```sh
 python3 scripts/check-docs.py --links-only
 python3 scripts/check-docs.py

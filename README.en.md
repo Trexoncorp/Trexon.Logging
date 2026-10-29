@@ -1,13 +1,13 @@
 # Trexon.Logging
 
-[Русский](README.md) · [English](README.en.md) · [Deutsch](README.de.md)
+[English](https://github.com/Trexoncorp/Trexon.Logging/blob/main/README.en.md) · [Русский](https://github.com/Trexoncorp/Trexon.Logging/blob/main/README.md) · [Deutsch](https://github.com/Trexoncorp/Trexon.Logging/blob/main/README.de.md)
 
 Structured logging for C# / .NET 8+: fluent configuration, colored console output,
 text and JSON files, contextual properties, and data redaction. The core library
-has no external NuGet dependencies. Licensed under [MIT](LICENSE).
+has no external NuGet dependencies. Licensed under [MIT](https://github.com/Trexoncorp/Trexon.Logging/blob/main/LICENSE).
 
-**Version:** `0.1.0-alpha.1`, the first MVP prerelease. The API may change before
-1.0. These guides describe this version.
+**Status:** early MVP prerelease. The API may change before 1.0.
+This README is the default package documentation on NuGet.
 
 ## Start with one line
 
@@ -15,8 +15,8 @@ has no external NuGet dependencies. Licensed under [MIT](LICENSE).
 ```csharp
 using Trexon.Logging;
 
-Log.Info("Приложение запущено");
-Log.Info("Заказ {OrderId} создан", 42);
+Log.Info("Application started");
+Log.Info("Order {OrderId} created", 42);
 Log.Shutdown();
 ```
 
@@ -34,30 +34,33 @@ using var logger = Logger.Create(config => config
     .Enrich.WithCaller()
     .Enrich.WithProperty("Application", "Orders")
     .Redact(@"Bearer\s+\S+", "Bearer ***")
-    .OnError(failure => Console.Error.WriteLine($"Сбой логирования: {failure.Stage}"))
+    .OnError(failure => Console.Error.WriteLine($"Logging failure: {failure.Stage}"))
     .WriteTo.Console(console => console.Timestamp("HH:mm:ss.fff").Colors())
     .WriteTo.File("logs/app.jsonl", file => file.Json()));
 
 using (logger.PushScope("RequestId", "request-42"))
 using (var orders = logger.Bind("Component", "Orders"))
 {
-    orders.Info("Заказ {OrderId} на сумму {Price:0.00}", 42, 199.9m);
+    orders.Info("Order {OrderId} costs {Price:0.00}", 42, 199.9m);
     orders.Debug("Authorization: {Authorization}", "Bearer demo-token");
 }
 ```
 
 `Logger` owns its file resources; `using` disposes them. Instances provide explicit
 lifetime management and test isolation. The static `Log` facade suits small apps.
-Code samples retain shared example data, including Russian text to demonstrate Unicode.
 
 ## Install and verify
 
-Install the first prerelease from NuGet. For project references and local packages,
-see [getting started](docs/en/GETTING_STARTED.md).
+Install the latest prerelease from NuGet. For project references and local packages,
+see [getting started](https://github.com/Trexoncorp/Trexon.Logging/blob/main/docs/en/GETTING_STARTED.md).
 
 ```sh
-dotnet add package Trexon.Logging --version 0.1.0-alpha.1
+dotnet add package Trexon.Logging --prerelease
 ```
+
+Without `--prerelease`, the command selects stable versions only. Until a stable
+version is published, include this option or pin an explicit prerelease with
+`--version 0.1.0-alpha.2`.
 
 Development requires SDK 10 and the .NET 8 runtime. From the repository root:
 
@@ -74,24 +77,24 @@ It does not execute release tags or package publication commands.
 
 ## Documentation
 
-Start at the [documentation index](docs/en/README.md).
+Start at the [documentation index](https://github.com/Trexoncorp/Trexon.Logging/blob/main/docs/en/README.md).
 
 | Task | Guide |
 | --- | --- |
-| Install and run | [Getting started](docs/en/GETTING_STARTED.md) |
-| Set levels, filters, and clocks | [Configuration](docs/en/CONFIGURATION.md) |
-| Pass templates and structured data | [Messages](docs/en/MESSAGES.md) |
-| Add application and request context | [Bind and PushScope](docs/en/CONTEXT.md) |
-| Configure console, files, colors, and JSON | [Output](docs/en/OUTPUT.md) |
-| Mask sensitive strings | [Redaction](docs/en/REDACTION.md) |
-| Handle exceptions and close resources | [Errors and lifetime](docs/en/ERRORS_AND_LIFETIME.md) |
-| Implement a sink | [Extending](docs/en/EXTENDING.md) |
-| Look up signatures and defaults | [API reference](docs/en/API.md) |
-| Understand the implementation | [Architecture](docs/en/ARCHITECTURE.md) |
-| Build, test, and maintain translations | [Development](docs/en/DEVELOPMENT.md) |
-| Publish a tagged NuGet release | [Publishing](docs/en/PUBLISHING.md) |
-| Investigate unexpected behavior | [Troubleshooting](docs/en/TROUBLESHOOTING.md) |
-| See planned work | [Roadmap](docs/en/ROADMAP.md) |
+| Install and run | [Getting started](https://github.com/Trexoncorp/Trexon.Logging/blob/main/docs/en/GETTING_STARTED.md) |
+| Set levels, filters, and clocks | [Configuration](https://github.com/Trexoncorp/Trexon.Logging/blob/main/docs/en/CONFIGURATION.md) |
+| Pass templates and structured data | [Messages](https://github.com/Trexoncorp/Trexon.Logging/blob/main/docs/en/MESSAGES.md) |
+| Add application and request context | [Bind and PushScope](https://github.com/Trexoncorp/Trexon.Logging/blob/main/docs/en/CONTEXT.md) |
+| Configure console, files, colors, and JSON | [Output](https://github.com/Trexoncorp/Trexon.Logging/blob/main/docs/en/OUTPUT.md) |
+| Mask sensitive strings | [Redaction](https://github.com/Trexoncorp/Trexon.Logging/blob/main/docs/en/REDACTION.md) |
+| Handle exceptions and close resources | [Errors and lifetime](https://github.com/Trexoncorp/Trexon.Logging/blob/main/docs/en/ERRORS_AND_LIFETIME.md) |
+| Implement a sink | [Extending](https://github.com/Trexoncorp/Trexon.Logging/blob/main/docs/en/EXTENDING.md) |
+| Look up signatures and defaults | [API reference](https://github.com/Trexoncorp/Trexon.Logging/blob/main/docs/en/API.md) |
+| Understand the implementation | [Architecture](https://github.com/Trexoncorp/Trexon.Logging/blob/main/docs/en/ARCHITECTURE.md) |
+| Build, test, and maintain translations | [Development](https://github.com/Trexoncorp/Trexon.Logging/blob/main/docs/en/DEVELOPMENT.md) |
+| Publish a tagged NuGet release | [Publishing](https://github.com/Trexoncorp/Trexon.Logging/blob/main/docs/en/PUBLISHING.md) |
+| Investigate unexpected behavior | [Troubleshooting](https://github.com/Trexoncorp/Trexon.Logging/blob/main/docs/en/TROUBLESHOOTING.md) |
+| See planned work | [Roadmap](https://github.com/Trexoncorp/Trexon.Logging/blob/main/docs/en/ROADMAP.md) |
 
 ## MVP limits
 
