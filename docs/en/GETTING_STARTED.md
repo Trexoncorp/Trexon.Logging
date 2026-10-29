@@ -69,23 +69,23 @@ Add it to the application:
 
 ```sh
 trexon_package_source="$(pwd)/artifacts"
-dotnet add ../Trexon.Logging.Playground package Trexon.Logging --version 0.1.0-dev --source "$trexon_package_source"
+dotnet add ../Trexon.Logging.Playground package Trexon.Logging --version 1.0.0-dev --source "$trexon_package_source"
 ```
 
 Use either a ProjectReference or a package reference. Remove the ProjectReference
 when switching to the package. The Bash/zsh variable above resolves an absolute
 source path from the repository root; use an explicit absolute path in other shells.
 
-NuGet caches by package ID and version. Rebuilding `0.1.0-dev` can leave an old
+NuGet caches by package ID and version. Rebuilding `1.0.0-dev` can leave an old
 cached copy in the consumer. For a separate check, use a unique local version;
 `build` and `pack --no-build` must use the same version:
 
 ```sh
-dotnet build Trexon.Logging/Trexon.Logging.csproj --configuration Release -p:Version=0.1.0-local.1
-dotnet pack Trexon.Logging/Trexon.Logging.csproj --configuration Release --no-build --output artifacts -p:Version=0.1.0-local.1
+dotnet build Trexon.Logging/Trexon.Logging.csproj --configuration Release -p:Version=1.0.0-local.1
+dotnet pack Trexon.Logging/Trexon.Logging.csproj --configuration Release --no-build --output artifacts -p:Version=1.0.0-local.1
 ```
 
-Then install `--version 0.1.0-local.1`. No `dotnet nuget push` is needed locally.
+Then install `--version 1.0.0-local.1`. No `dotnet nuget push` is needed locally.
 
 ## Your first logger
 
@@ -131,15 +131,12 @@ invalid. See [lifetime](ERRORS_AND_LIFETIME.md).
 
 ## Install from NuGet
 
-The plain `dotnet add package Trexon.Logging` command selects a stable release.
-While only alpha versions exist, use `--prerelease` or an explicit `--version`.
-
-Select the first prerelease explicitly, or use `--prerelease` for the latest one:
+Install the latest stable release:
 
 ```sh
-dotnet add package Trexon.Logging --version 0.1.0-alpha.1
-dotnet add package Trexon.Logging --prerelease
+dotnet add package Trexon.Logging
 ```
 
-Check the registry for current release availability. See [publishing](PUBLISHING.md)
-for local package preparation and tag releases.
+To pin the first stable release, add `--version 1.0.0`.
+Use `--prerelease` explicitly to opt into future preview versions.
+See [publishing](PUBLISHING.md) for package preparation and tag releases.

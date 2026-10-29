@@ -101,7 +101,7 @@ dotnet build Trexon.Logging/Trexon.Logging.csproj --configuration Release -p:Con
 dotnet pack Trexon.Logging/Trexon.Logging.csproj --configuration Release --no-build --output artifacts -p:ContinuousIntegrationBuild=true -warnaserror
 ```
 
-`artifacts/` receives the nupkg and snupkg for `0.1.0-dev`. The main package contains
+`artifacts/` receives the nupkg and snupkg for `1.0.0-dev`. The main package contains
 the DLL, XML docs, multilingual READMEs, MIT license, and repository metadata.
 The symbol package contains portable PDBs. SDK Source Link associates committed
 sources with the repository; untracked sources can be embedded in PDBs. Uncommitted

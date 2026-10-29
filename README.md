@@ -6,7 +6,8 @@ Structured logging for C# / .NET 8+: fluent configuration, colored console outpu
 text and JSON files, contextual properties, and data redaction. The core library
 has no external NuGet dependencies. Licensed under [MIT](https://github.com/Trexoncorp/Trexon.Logging/blob/main/LICENSE).
 
-**Status:** early MVP prerelease. The API may change before 1.0.
+**Version:** `1.0.0`, the first stable release. Public API compatibility is maintained
+within 1.x; breaking changes require a new major version.
 This README is the default package documentation on NuGet.
 
 ## Start with one line
@@ -51,16 +52,15 @@ lifetime management and test isolation. The static `Log` facade suits small apps
 
 ## Install and verify
 
-Install the latest prerelease from NuGet. For project references and local packages,
+Install the latest stable release from NuGet. For project references and local packages,
 see [getting started](https://github.com/Trexoncorp/Trexon.Logging/blob/main/docs/en/GETTING_STARTED.md).
 
 ```sh
-dotnet add package Trexon.Logging --prerelease
+dotnet add package Trexon.Logging
 ```
 
-Without `--prerelease`, the command selects stable versions only. Until a stable
-version is published, include this option or pin an explicit prerelease with
-`--version 0.1.0-alpha.2`.
+To pin this release, add `--version 1.0.0`. Use `--prerelease` only when opting
+into future preview releases.
 
 Development requires SDK 10 and the .NET 8 runtime. From the repository root:
 
@@ -96,7 +96,7 @@ Start at the [documentation index](https://github.com/Trexoncorp/Trexon.Logging/
 | Investigate unexpected behavior | [Troubleshooting](https://github.com/Trexoncorp/Trexon.Logging/blob/main/docs/en/TROUBLESHOOTING.md) |
 | See planned work | [Roadmap](https://github.com/Trexoncorp/Trexon.Logging/blob/main/docs/en/ROADMAP.md) |
 
-## MVP limits
+## Current limits
 
 Writes are synchronous: a slow sink delays the calling thread. Rotation, retention,
 a background queue, and a `Microsoft.Extensions.Logging` adapter are planned.

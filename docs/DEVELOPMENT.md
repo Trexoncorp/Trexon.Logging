@@ -134,7 +134,7 @@ dotnet build Trexon.Logging/Trexon.Logging.csproj --configuration Release -p:Con
 dotnet pack Trexon.Logging/Trexon.Logging.csproj --configuration Release --no-build --output artifacts -p:ContinuousIntegrationBuild=true -warnaserror
 ```
 
-В `artifacts/` появятся `Trexon.Logging.0.1.0-dev.nupkg` и соответствующий
+В `artifacts/` появятся `Trexon.Logging.1.0.0-dev.nupkg` и соответствующий
 `.snupkg`. Основной пакет содержит DLL, XML-документацию, README на трёх языках, MIT-лицензию
 и repository metadata; символы — portable PDB. Source Link включён средствами
 SDK, untracked sources могут встраиваться в PDB. Метаданные commit для

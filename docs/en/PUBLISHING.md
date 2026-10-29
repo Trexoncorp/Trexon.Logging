@@ -54,10 +54,10 @@ and [symbol packages](https://learn.microsoft.com/en-us/nuget/create-packages/sy
 
 ```sh
 dotnet restore Trexon.Logging.slnx
-dotnet build Trexon.Logging.slnx --configuration Release --no-restore -p:Version=0.1.0-alpha.1 -p:ContinuousIntegrationBuild=true -warnaserror
+dotnet build Trexon.Logging.slnx --configuration Release --no-restore -p:Version=1.0.0 -p:ContinuousIntegrationBuild=true -warnaserror
 dotnet test --solution Trexon.Logging.slnx --configuration Release --no-build --no-restore
 python3 scripts/check-docs.py
-dotnet pack Trexon.Logging/Trexon.Logging.csproj --configuration Release --no-build --output artifacts -p:Version=0.1.0-alpha.1 -p:ContinuousIntegrationBuild=true -warnaserror
+dotnet pack Trexon.Logging/Trexon.Logging.csproj --configuration Release --no-build --output artifacts -p:Version=1.0.0 -p:ContinuousIntegrationBuild=true -warnaserror
 ```
 
 Build and pack --no-build must use matching versions. nupkg includes the net8.0 DLL,
@@ -72,8 +72,8 @@ are instructions, not automatic preparation actions:
 ```sh
 git switch main
 git pull --ff-only origin main
-git tag -a v0.1.0-alpha.1 -m "Trexon.Logging 0.1.0-alpha.1"
-git push origin v0.1.0-alpha.1
+git tag -a v1.0.0 -m "Trexon.Logging 1.0.0"
+git push origin v1.0.0
 ```
 
 The tag alone determines the version; no csproj edit is needed. Accepted examples:
@@ -81,7 +81,7 @@ v1.2.3, v1.2.3-alpha.1, v1.2.3-rc.2. Leading zeroes, missing numeric components,
 and +build metadata are rejected. Validate without publishing:
 
 ```sh
-bash scripts/release-version.sh v0.1.0-alpha.1
+bash scripts/release-version.sh v1.0.0
 ```
 
 Wait for **Publish to NuGet** to complete, then verify the package page. NuGet
@@ -92,8 +92,8 @@ validation/indexing may take more time. The workflow does not create a GitHub Re
 Rerun failed jobs after transient errors. --skip-duplicate permits retrying an
 already uploaded package; symbols have a separate step. If artifacts expired,
 rerun all jobs for the same tag. Do not repurpose published versions or release tags;
-ship fixes under a new tag. Ordinary CI packs 0.1.0-dev without publishing.
-Use an agreed prerelease for the first publication.
+ship fixes under a new tag. Ordinary CI packs 1.0.0-dev without publishing.
+Choose the version and release channel explicitly before creating the tag.
 
 Check main CI on all three operating systems before tagging. The release workflow
 retests on Ubuntu and does not automatically wait for a separate CI run.

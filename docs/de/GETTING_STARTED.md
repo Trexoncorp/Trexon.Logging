@@ -70,7 +70,7 @@ Dann das Paket zur Anwendung hinzufügen:
 
 ```sh
 trexon_package_source="$(pwd)/artifacts"
-dotnet add ../Trexon.Logging.Playground package Trexon.Logging --version 0.1.0-dev --source "$trexon_package_source"
+dotnet add ../Trexon.Logging.Playground package Trexon.Logging --version 1.0.0-dev --source "$trexon_package_source"
 ```
 
 Entweder ProjectReference oder Paketreferenz verwenden. Beim Wechsel zum Paket
@@ -78,16 +78,16 @@ die ProjectReference entfernen. Die Bash-/zsh-Variable bildet im Projektstamm
 einen absoluten Quellpfad; in anderen Shells den vollständigen Pfad angeben.
 
 NuGet speichert Pakete nach ID und Version im Cache. Beim erneuten Bauen von
-`0.1.0-dev` kann eine alte Kopie erhalten bleiben. Für eine separate Prüfung
+`1.0.0-dev` kann eine alte Kopie erhalten bleiben. Für eine separate Prüfung
 eine eindeutige lokale Version verwenden. Bei `build` und `pack --no-build`
 müssen die Versionen übereinstimmen:
 
 ```sh
-dotnet build Trexon.Logging/Trexon.Logging.csproj --configuration Release -p:Version=0.1.0-local.1
-dotnet pack Trexon.Logging/Trexon.Logging.csproj --configuration Release --no-build --output artifacts -p:Version=0.1.0-local.1
+dotnet build Trexon.Logging/Trexon.Logging.csproj --configuration Release -p:Version=1.0.0-local.1
+dotnet pack Trexon.Logging/Trexon.Logging.csproj --configuration Release --no-build --output artifacts -p:Version=1.0.0-local.1
 ```
 
-Danach `--version 0.1.0-local.1` installieren. Ein `dotnet nuget push` ist lokal unnötig.
+Danach `--version 1.0.0-local.1` installieren. Ein `dotnet nuget push` ist lokal unnötig.
 
 ## Erster Logger
 
@@ -133,15 +133,12 @@ werden ungültig. Siehe [Lebenszyklus](ERRORS_AND_LIFETIME.md).
 
 ## Aus NuGet installieren
 
-Der einfache Befehl `dotnet add package Trexon.Logging` wählt eine stabile Version.
-Solange nur Alpha-Versionen vorliegen, `--prerelease` oder eine explizite `--version` verwenden.
-
-Die erste Vorabversion explizit wählen oder mit `--prerelease` die neueste verwenden:
+Die neueste stabile Version installieren:
 
 ```sh
-dotnet add package Trexon.Logging --version 0.1.0-alpha.1
-dotnet add package Trexon.Logging --prerelease
+dotnet add package Trexon.Logging
 ```
 
-Die aktuelle Verfügbarkeit im Paketregister prüfen. Vorbereitung und Release-Tags
-werden unter [Veröffentlichung](PUBLISHING.md) beschrieben.
+Für die erste stabile Version `--version 1.0.0` ergänzen.
+Zukünftige Vorabversionen erfordern ausdrücklich `--prerelease`.
+Vorbereitung und Release-Tags werden unter [Veröffentlichung](PUBLISHING.md) beschrieben.
