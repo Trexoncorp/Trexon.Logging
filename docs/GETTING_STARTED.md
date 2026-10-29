@@ -148,6 +148,9 @@ finally
 
 ## Установка из NuGet
 
+Обычная команда `dotnet add package Trexon.Logging` выбирает стабильную версию.
+Пока опубликованы только alpha-версии, нужен `--prerelease` или явный `--version`.
+
 Для первого prerelease укажите версию явно; для последнего prerelease используйте
 `--prerelease`:
 

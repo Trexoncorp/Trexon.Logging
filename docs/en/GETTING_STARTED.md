@@ -131,6 +131,9 @@ invalid. See [lifetime](ERRORS_AND_LIFETIME.md).
 
 ## Install from NuGet
 
+The plain `dotnet add package Trexon.Logging` command selects a stable release.
+While only alpha versions exist, use `--prerelease` or an explicit `--version`.
+
 Select the first prerelease explicitly, or use `--prerelease` for the latest one:
 
 ```sh

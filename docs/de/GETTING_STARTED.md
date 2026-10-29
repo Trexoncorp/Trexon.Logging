@@ -133,6 +133,9 @@ werden ungültig. Siehe [Lebenszyklus](ERRORS_AND_LIFETIME.md).
 
 ## Aus NuGet installieren
 
+Der einfache Befehl `dotnet add package Trexon.Logging` wählt eine stabile Version.
+Solange nur Alpha-Versionen vorliegen, `--prerelease` oder eine explizite `--version` verwenden.
+
 Die erste Vorabversion explizit wählen oder mit `--prerelease` die neueste verwenden:
 
 ```sh
