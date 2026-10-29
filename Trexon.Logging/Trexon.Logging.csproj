@@ -10,7 +10,7 @@
     <PackageId>Trexon.Logging</PackageId>
     <Title>Trexon.Logging</Title>
     <Authors>Trexoncorp</Authors>
-    <Description>A C# logging library inspired by Python's Loguru. Currently under development; no logging API is implemented yet.</Description>
+    <Description>Simple structured logging for .NET with fluent configuration, console and file output, contextual properties and redaction.</Description>
     <PackageTags>logging;logger;loguru;structured-logging</PackageTags>
     <PackageProjectUrl>https://github.com/Trexoncorp/Trexon.Logging</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Trexoncorp/Trexon.Logging</RepositoryUrl>
@@ -28,6 +28,8 @@
 
   <ItemGroup>
     <None Include="../README.md" Pack="true" PackagePath="/" />
+    <None Include="../README.en.md" Pack="true" PackagePath="/" />
+    <None Include="../README.de.md" Pack="true" PackagePath="/" />
     <None Include="../LICENSE" Pack="true" PackagePath="/" />
   </ItemGroup>
 

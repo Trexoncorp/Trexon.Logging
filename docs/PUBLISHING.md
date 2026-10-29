@@ -1,20 +1,32 @@
 # Публикация Trexon.Logging в NuGet
 
+[Русский](PUBLISHING.md) · [English](en/PUBLISHING.md) · [Deutsch](de/PUBLISHING.md)
+
+[Оглавление](README.md) · [Локальная разработка](DEVELOPMENT.md)
+
+Эта глава описывает выпуск после готовности рабочей копии. Команды с тегами
+и push являются инструкцией для отдельного согласованного релиза.
+Обычная сборка или проверка документации ничего не публикует.
+
 ## Что делает GitHub Actions
 
 - `ci.yml`: push в `main` и pull request в `main` → restore, Release build,
-  упаковка на Linux, Windows и macOS. Пакеты доступны в артефактах запуска.
+  тесты на .NET 8/.NET 10 и упаковка на Linux, Windows и macOS.
+  Пакеты доступны в артефактах запуска.
 - `publish.yml`: push тега `v*` → проверка версии и принадлежности коммита
-  истории `main`, сборка, упаковка, публикация `.nupkg` и `.snupkg` в nuget.org.
+  истории `main`, сборка и тесты на Ubuntu, упаковка, публикация `.nupkg` и `.snupkg` в nuget.org.
 - Publish job использует GitHub environment `nuget` и OIDC. Постоянный API-ключ
   не хранится; временный ключ выдаёт `NuGet/login` перед отправкой пакетов.
 - Publish job отправляет готовые артефакты package job и не пересобирает пакет.
-- Сейчас проверяются сборка и упаковка. Когда появится реализация, перед
-  публикацией нужно добавить запуск её тестов в оба workflow.
+- Падение тестов останавливает упаковку и публикацию.
+
+Перед релизной сборкой workflow также проверяет документацию на трёх языках
+и компилирует/запускает помеченные примеры. Ошибка проверки останавливает релиз.
 
 ## Однократная настройка
 
 1. Войти в свой аккаунт на [nuget.org](https://www.nuget.org/).
+   Подтвердить email нового аккаунта: без этого сайт не разрешает создать policy.
    Убедиться, что он имеет право публиковать пакет `Trexon.Logging`.
    Публичный GitHub-репозиторий сам по себе не резервирует имя в NuGet.
 2. На nuget.org открыть **Trusted Publishing**, создать GitHub policy:
@@ -26,6 +38,9 @@
    | Workflow File | `publish.yml` |
    | Environment | `nuget` |
    | Package scope / glob pattern | `Trexon.Logging` |
+
+   Policy должна иметь scope **Push new packages and package versions**.
+   Разрешение unlist/relist для данного workflow не требуется.
 
    Для первого релиза разрешить публикацию нового пакета, а для следующих —
    новых версий. Владельцем policy выбрать аккаунт или NuGet-организацию,
@@ -51,18 +66,20 @@
 ```sh
 dotnet restore Trexon.Logging.slnx
 dotnet build Trexon.Logging.slnx --configuration Release --no-restore -p:Version=0.1.0-alpha.1 -p:ContinuousIntegrationBuild=true -warnaserror
+dotnet test --solution Trexon.Logging.slnx --configuration Release --no-build --no-restore
+python3 scripts/check-docs.py
 dotnet pack Trexon.Logging/Trexon.Logging.csproj --configuration Release --no-build --output artifacts -p:Version=0.1.0-alpha.1 -p:ContinuousIntegrationBuild=true -warnaserror
 ```
 
 У `build` и `pack --no-build` версия должна совпадать, чтобы версия DLL
 соответствовала версии пакета. `.nupkg` содержит DLL для `net8.0`, XML-документацию,
-README, MIT-лицензию и метаданные репозитория. `.snupkg` содержит portable PDB.
+README на трёх языках, MIT-лицензию и метаданные репозитория. `.snupkg` содержит portable PDB.
 Source Link поддерживается SDK; связь с исходниками появляется при сборке
 закоммиченного кода из Git-репозитория.
 
 ## Выпуск версии
 
-Первую версию выпускать после появления рабочего API и тестов.
+Первую версию выпускать после проверки рабочего API, тестов и документации.
 Следующие команды — инструкция, они не выполняются автоматически при подготовке
 репозитория:
 
@@ -95,5 +112,27 @@ Workflow не создаёт GitHub Release — он публикует NuGet-п
 Если артефакт истёк, повторно запустить все jobs для того же тега.
 
 Опубликованные версии и релизные теги не переиспользовать. Исправления
-выпускать новым тегом. CI-пакеты версии `0.1.0-dev` предназначены для локальных
-проверок и не отправляются в nuget.org.
+выпускать новым тегом. Обычный CI собирает пакеты версии `0.1.0-dev`
+для локальных проверок и сам не вызывает publish. Отправка версии определяется
+отдельным релизным тегом; для первого релиза используйте согласованный prerelease.
+
+Перед тегом проверьте CI main на всех трёх ОС. Релизный workflow повторно
+запускает свои тесты на Ubuntu и автоматически не ожидает отдельный запуск CI.
+
+## Диагностика workflow
+
+| Сбой | Что проверить |
+| --- | --- |
+| Invalid release tag | `scripts/release-version.sh`: три числовые части, корректный prerelease |
+| Tag commit not reachable from main | В main должен присутствовать выпускаемый commit |
+| Test job failed | Неисправный target/тест, runtime .NET 8, актуальные бинарники и runner |
+| Environment rejected deployment | В окружении nuget должен быть разрешён тип Tag с pattern v* |
+| NUGET_USER missing | Repository variable содержит имя NuGet-профиля |
+| OIDC login failed | Аккаунт, owner/repository, publish.yml, environment и scope policy |
+| NuGet rejected package ID | Права владельца, занятость/резервирование имени и package scope |
+| Version already exists | Версию нельзя перезаписать; исправление требует нового тега |
+| Symbols failed | Повторить failed job; шаг snupkg отделён от основного push |
+
+Активная policy и совпадающие настройки подтверждают конфигурацию. Фактический
+обмен OIDC и приём пакета NuGet подтверждаются успешным релизным запуском;
+зелёный CI без релизного тега этого не проверяет.

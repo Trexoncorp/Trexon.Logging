@@ -38,10 +38,15 @@ jobs:
       - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
         with:
           global-json-file: global.json
+          dotnet-version: '8.0.x'
       - name: Restore
         run: dotnet restore Trexon.Logging.slnx
+      - name: Validate documentation and examples
+        run: python3 scripts/check-docs.py
       - name: Build
         run: dotnet build Trexon.Logging.slnx --configuration Release --no-restore -p:Version="$PACKAGE_VERSION" -p:ContinuousIntegrationBuild=true -warnaserror
+      - name: Test (.NET 8 and .NET 10)
+        run: dotnet test --solution Trexon.Logging.slnx --configuration Release --no-build --no-restore
       - name: Pack
         run: dotnet pack Trexon.Logging/Trexon.Logging.csproj --configuration Release --no-build --output artifacts -p:Version="$PACKAGE_VERSION" -p:ContinuousIntegrationBuild=true -warnaserror
       - name: Upload release packages
